@@ -6,11 +6,14 @@ import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
 const config = {
-	module.exports = {
   images: {
-    remotePatterns: [new URL('cdn.dummyjson.com')],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.dummyjson.com',
+      },
+    ],
   },
-}
 };
 
 export default config;
