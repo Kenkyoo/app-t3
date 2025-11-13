@@ -2,7 +2,6 @@ import { Button } from "~/components/ui/button";
 import { Logo } from "~/components/logo";
 import { NavMenu } from "~/components/nav-menu";
 import { NavigationSheet } from "~/components/navigation-sheet";
-import { SunIcon } from "lucide-react";
 import { auth } from "~/server/better-auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";

@@ -6,7 +6,7 @@ import {
   navigationMenuTriggerStyle,
 } from "~/components/ui/navigation-menu";
 import Link from "next/link";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => (
   <NavigationMenu {...props}>
