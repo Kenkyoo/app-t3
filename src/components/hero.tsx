@@ -5,14 +5,9 @@ import { cn } from "~/lib/utils";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
 import Link from "next/link";
 import { api } from "~/trpc/server";
-import { getSession } from "~/server/better-auth/server";
-import { auth } from "~/server/better-auth";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 
 export default async function Hero() {
   const hello = await api.post.hello({ text: "from tRPC" });
-  const session = await getSession();
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
       <AnimatedGridPattern
@@ -31,35 +26,25 @@ export default async function Hero() {
           asChild
         >
           <Link href="#">
-            Just released v1.0.0 <ArrowUpRight className="ml-1 size-4" />
+            Build with stripe <ArrowUpRight className="ml-1 size-4" />
           </Link>
         </Badge>
         <h1 className="mt-6 text-4xl font-semibold tracking-tighter sm:text-5xl md:text-6xl md:leading-[1.2] lg:text-7xl">
-          Customized Shadcn UI Blocks & Components
+          App e-commerce with stripe payments
         </h1>
         <p className="text-foreground/80 mt-6 md:text-lg">
           {hello ? hello.greeting : "Loading tRPC query..."}
         </p>
         <div className="mt-12 flex items-center justify-center gap-4">
-          {!session ? (
-            <Button>
-              <Link href="/login">Login</Link>
+          <Link href="/products">
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-full text-base shadow-none"
+            >
+              <CirclePlay className="h-5! w-5!" /> Products
             </Button>
-          ) : (
-            <form>
-              <Button
-                formAction={async () => {
-                  "use server";
-                  await auth.api.signOut({
-                    headers: await headers(),
-                  });
-                  redirect("/");
-                }}
-              >
-                Sign out
-              </Button>
-            </form>
-          )}
+          </Link>
           <Link href="/create">
             <Button
               variant="outline"
