@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -12,17 +11,26 @@ import {
 } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { Textarea } from "~/components/ui/textarea";
 import { api } from "~/trpc/react";
 
 export default function Post() {
   const utils = api.useUtils();
   const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+
   const createPost = api.post.create.useMutation({
     onSuccess: async () => {
       await utils.post.invalidate();
       setName("");
+      setPrice("");
+      setDescription("");
+      setImage("");
     },
   });
+
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -34,33 +42,65 @@ export default function Post() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createPost.mutate({ name });
+          const priceNumber = parseFloat(price);
+          if (isNaN(priceNumber) || priceNumber <= 0) {
+            alert("Please enter a valid price");
+            return;
+          }
+          createPost.mutate({
+            name,
+            price: priceNumber,
+            description: description || undefined,
+            image: image || undefined,
+          });
         }}
         className="flex flex-col gap-2"
       >
         <CardContent>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="email">Title</Label>
+              <Label htmlFor="name">Title</Label>
               <Input
-                id="title"
+                id="name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
+
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <a
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-              <Input id="password" type="password" required />
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Optional product description"
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="image">Image URL</Label>
+              <Input
+                id="image"
+                type="url"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                placeholder="https://example.com/image.jpg"
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="price">Price</Label>
+              <Input
+                id="price"
+                type="number"
+                step="0.01"
+                min="0"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                required
+              />
             </div>
           </div>
         </CardContent>
