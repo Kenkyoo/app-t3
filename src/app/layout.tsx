@@ -6,6 +6,7 @@ import { ThemeProvider } from "~/components/theme-provider";
 import { TRPCReactProvider } from "~/trpc/react";
 import Navbar from "~/components/navbar";
 import Footer from "~/components/footer";
+import { Heart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -31,6 +32,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <div className="bg-purple-600 p-2 border-b flex gap-4 items-center justify-center">
+              <p className="scroll-m-20 text-md font-semibold tracking-tight">
+               Dev by Kenkyo -- made with a lot of
+              </p>
+              <Heart fill="red"/>
+            </div>
             <Navbar />
             {children}
             <Footer />
