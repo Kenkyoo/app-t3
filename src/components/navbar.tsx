@@ -9,7 +9,7 @@ import { getSession } from "~/server/better-auth/server";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
 
-async function Navbar() {
+export default async function Navbar() {
   const session = await getSession();
   return (
     <nav className="bg-background h-16 border-b">
@@ -52,5 +52,3 @@ async function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;

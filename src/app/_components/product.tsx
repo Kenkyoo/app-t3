@@ -59,9 +59,13 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="max-w-xs gap-0 pt-0 shadow-none">
-      <CardHeader className="flex flex-row items-center gap-3 px-5 py-4 font-semibold">
-        <div className="rounded-full">
+    <Card className="max-w-xs gap-0 p-2 shadow-none">
+      <CardHeader className="flex flex-row items-center gap-3 px-5 py-4 my-5 font-semibold">
+        {product.name}
+      </CardHeader>
+
+      <CardContent className="text-muted-foreground mt-1 px-5 text-[15px]">
+        <div className="rounded-full py-2">
           {product.image && (
             <Image
               width={300}
@@ -72,15 +76,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             />
           )}
         </div>
-        {product.name}
-      </CardHeader>
-
-      <CardContent className="text-muted-foreground mt-1 px-5 text-[15px]">
-        <p>{product.description}</p>
-        <div className="bg-muted mt-5 aspect-video w-full rounded-xl" />
+        <p className="mt-2">{product.description}</p>
       </CardContent>
 
-      <CardFooter className="mt-6 flex gap-4">
+      <CardFooter className="mt-6 flex gap-4 py-2">
         <span className="text-2xl font-bold">${product.price.toFixed(2)}</span>
         <Button onClick={handleCheckout} disabled={loading} className="/blocks">
           {loading ? "Procesando..." : "Comprar"} <ArrowRight />
