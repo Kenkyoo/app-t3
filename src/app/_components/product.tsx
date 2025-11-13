@@ -3,6 +3,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "~/components/ui/card";
+import { Button } from "~/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 interface ProductCardProps {
   product: {
@@ -51,28 +59,33 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="rounded-lg border p-4 shadow-md">
-      {product.image && (
-        <Image
-          width={300}
-          height={300}
-          src={product.image}
-          alt={product.name}
-          className="mb-4 h-48 w-full rounded-md object-cover"
-        />
-      )}
-      <h3 className="mb-2 text-xl font-semibold">{product.name}</h3>
-      <p className="mb-4 text-gray-600">{product.description}</p>
-      <div className="flex items-center justify-between">
+    <Card className="max-w-xs gap-0 pt-0 shadow-none">
+      <CardHeader className="flex flex-row items-center gap-3 px-5 py-4 font-semibold">
+        <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full">
+          {product.image && (
+            <Image
+              width={300}
+              height={300}
+              src={product.image}
+              alt={product.name}
+              className="mb-4 h-48 w-full rounded-md object-cover"
+            />
+          )}
+        </div>
+        {product.name}
+      </CardHeader>
+
+      <CardContent className="text-muted-foreground mt-1 px-5 text-[15px]">
+        <p>{product.description}</p>
+        <div className="bg-muted mt-5 aspect-video w-full rounded-xl" />
+      </CardContent>
+
+      <CardFooter className="mt-6">
         <span className="text-2xl font-bold">${product.price.toFixed(2)}</span>
-        <button
-          onClick={handleCheckout}
-          disabled={loading}
-          className="rounded-md bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
-        >
-          {loading ? "Procesando..." : "Comprar"}
-        </button>
-      </div>
-    </div>
+        <Button onClick={handleCheckout} disabled={loading} className="/blocks">
+          {loading ? "Procesando..." : "Comprar"} <ArrowRight />
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -27,13 +26,10 @@ export default function Post() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle>Create a product</CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Enter your product, image, description and price.
         </CardDescription>
-        <CardAction>
-          <Button variant="link">Sign Up</Button>
-        </CardAction>
       </CardHeader>
       <form
         onSubmit={(e) => {
@@ -45,7 +41,7 @@ export default function Post() {
         <CardContent>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Title</Label>
               <Input
                 id="title"
                 type="text"
