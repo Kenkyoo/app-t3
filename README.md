@@ -1,29 +1,53 @@
-# Create T3 App
+# app-t3
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Aplicación simple de compras con pagos usando **Stripe**. Construida con **Next.js**, **tRPC**, **Prisma**, **Supabase** y **TailwindCSS**.
 
-## What's next? How do I make an app with this?
+## Demo
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+* **Deploy:** [https://app-t3-red.vercel.app/](https://app-t3-red.vercel.app/)
+* **Repo:** [https://github.com/Kenkyoo/app-t3](https://github.com/Kenkyoo/app-t3)
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Tecnologías
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+* Next.js
+* Prisma + Supabase
+* Stripe (Checkout)
+* tRPC
+* React Query
+* TailwindCSS
+* Auth con better-auth
 
-## Learn More
+## Funciones principales
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+* Registro e inicio de sesión
+* Listado de productos
+* Carrito de compras básico
+* Pagos con Stripe Checkout
+* Gestión de datos con Prisma
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Scripts
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+* `npm run dev` — modo desarrollo
+* `npm run build` — build producción
+* `npm run start` — iniciar build
+* `npm run db:generate` — migraciones
+* `npm run db:studio` — Prisma Studio
 
-## How do I deploy this?
+## Variables de entorno
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Crea un `.env` con:
+
+```
+DATABASE_URL="URL de Supabase"
+STRIPE_SECRET_KEY="clave secreta"
+STRIPE_PUBLIC_KEY="clave pública"
+NEXTAUTH_SECRET="secreto"
+```
+
+## Deploy
+
+El deploy se realiza en **Vercel**. No requiere configuración extra más que las variables de entorno.
+
+## Licencia
+
+MIT
